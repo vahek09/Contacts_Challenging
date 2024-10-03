@@ -3,11 +3,11 @@ package guru.springframework;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public abstract class Contact implements Serializable {
+public abstract class AbstractContact implements Serializable {
     protected LocalDateTime createdTime;
     protected LocalDateTime lastEditTime;
 
-    public Contact() {
+    public AbstractContact() {
         this.createdTime = LocalDateTime.now();
         this.lastEditTime = LocalDateTime.now();
     }
@@ -30,4 +30,16 @@ public abstract class Contact implements Serializable {
     }
 
     public abstract void display();
+
+    public static String validatePhoneNumber(String phoneNumber) {
+        String correctNumberRegexOne = "\\+?\\(?(\\w{2,}|\\d)\\)?((-|\\s)\\w{2,})*";
+        String correctNumberRegexTwo = "\\+?(\\w{2,}|\\d)(-|\\s)\\(?\\w{2,}\\)?((-|\\s)\\w{2,})*";
+
+        if (phoneNumber.matches(correctNumberRegexOne) || phoneNumber.matches(correctNumberRegexTwo)) {
+            return phoneNumber;
+        } else {
+            System.out.println("Wrong number format!");
+            return "[no number]";
+        }
+    }
 }

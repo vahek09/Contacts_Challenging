@@ -16,7 +16,7 @@ class MainTest {
     private ByteArrayOutputStream outContent;
     private PhoneBook phoneBook;
     private Scanner mockScanner;
-    private Contact mockContact;
+    private AbstractContact mockContact;
 
     @BeforeEach
     void setUp() {
@@ -29,7 +29,7 @@ class MainTest {
 
         // Mock the Scanner and Contact objects
         mockScanner = mock(Scanner.class);
-        mockContact = mock(Contact.class);
+        mockContact = mock(AbstractContact.class);
 
         // Mock getEditableFields to return a valid array
         when(mockContact.getEditableFields()).thenReturn(new String[]{"name", "surname", "phoneNumber"});
@@ -87,7 +87,7 @@ class MainTest {
         Person person = new Person("John", "Doe", "123 456 789");
         phoneBook.addContact(person);
         when(mockScanner.nextLine()).thenReturn("surname", "Doe Jr.");
-        Contact contact = phoneBook.getContact(0);
+        AbstractContact contact = phoneBook.getContact(0);
 
         // when
         Main.handleEdit(mockScanner, contact);
@@ -169,7 +169,7 @@ class MainTest {
     @DisplayName("Should correctly handle gender input during edit")
     void testHandleEdit_GenderField() {
         // given
-        Contact mockContact = mock(Person.class);
+        AbstractContact mockContact = mock(Person.class);
         when(mockContact.getEditableFields()).thenReturn(new String[]{"name", "surname", "gender", "phoneNumber"});
         when(mockScanner.nextLine()).thenReturn("gender", "X", "Y", "F");
 

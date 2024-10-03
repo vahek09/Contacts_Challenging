@@ -1,6 +1,6 @@
 package guru.springframework;
 
-public class Organization extends Contact {
+public class Organization extends AbstractContact {
     private String organizationName;
     private String address;
     private String phoneNumber;
@@ -50,15 +50,4 @@ public class Organization extends Contact {
         System.out.println("Time last edit: " + lastEditTime);
     }
 
-    private String validatePhoneNumber(String phoneNumber) {
-        String correctNumberRegexOne = "\\+?\\(?(\\w{2,}|\\d)\\)?((-|\\s)\\w{2,})*";
-        String correctNumberRegexTwo = "\\+?(\\w{2,}|\\d)(-|\\s)\\(?\\w{2,}\\)?((-|\\s)\\w{2,})*";
-
-        if (phoneNumber.matches(correctNumberRegexOne) || phoneNumber.matches(correctNumberRegexTwo)) {
-            return phoneNumber;
-        } else {
-            System.out.println("Wrong number format!");
-            return "[no number]";
-        }
-    }
 }

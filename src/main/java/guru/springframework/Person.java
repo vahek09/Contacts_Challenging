@@ -1,6 +1,6 @@
 package guru.springframework;
 
-public class Person extends Contact {
+public class Person extends AbstractContact {
     private String name;
     private String surname;
     private String birthDate;
@@ -92,9 +92,7 @@ public class Person extends Contact {
     }
 
     private boolean isValidPhoneNumber(String phoneNumber) {
-        // Simplified regex for this example, you may tweak it based on your requirement
-        String correctNumberRegex = "\\+?\\d{1,3}?[-.\\s]?\\(?\\d{1,4}?\\)?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,9}";
-        return phoneNumber.matches(correctNumberRegex);
+       return !(validatePhoneNumber(phoneNumber).equals("[no number]"));
     }
 }
 

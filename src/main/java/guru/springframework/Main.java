@@ -52,7 +52,7 @@ public class Main {
                 }
             } while (isValidPhoneNumber(phoneNumber));
 
-            Contact person = new Person(name, surname, phoneNumber);
+            AbstractContact person = new Person(name, surname, phoneNumber);
             phoneBook.addContact(person);
             System.out.println("The record added.");
         } else if ("organization".equalsIgnoreCase(type)) {
@@ -63,7 +63,7 @@ public class Main {
             System.out.println("Enter phone number: ");
             String phoneNumber = scanner.nextLine().trim();
 
-            Contact organization = new Organization(orgName, address, phoneNumber);
+            AbstractContact organization = new Organization(orgName, address, phoneNumber);
             phoneBook.addContact(organization);
             System.out.println("The record added.");
         }
@@ -81,7 +81,7 @@ public class Main {
 
         try {
             int index = Integer.parseInt(listAction) - 1;  // Convert to 0-based index
-            Contact contact = phoneBook.getContact(index);
+            AbstractContact contact = phoneBook.getContact(index);
             if (contact != null) {
                 contact.display();  // Display the selected contact
                 handleRecordMenu(phoneBook, scanner, contact); // Handle further actions
@@ -93,7 +93,7 @@ public class Main {
         }
     }
 
-    static void handleRecordMenu(PhoneBook phoneBook, Scanner scanner, Contact contact) {
+    static void handleRecordMenu(PhoneBook phoneBook, Scanner scanner, AbstractContact contact) {
         System.out.println("[record] Enter action (edit, delete, menu): ");
         String action = scanner.nextLine().trim();
 
@@ -113,7 +113,7 @@ public class Main {
         }
     }
 
-    static void handleEdit(Scanner scanner, Contact contact) {
+    static void handleEdit(Scanner scanner, AbstractContact contact) {
         // Show editable fields for the contact
         System.out.println("Select a field (" + String.join(", ", contact.getEditableFields()) + "): ");
         String field = scanner.nextLine().trim().toLowerCase();
@@ -155,7 +155,7 @@ public class Main {
         String query = scanner.nextLine().trim();
 
         // Perform the search
-        List<Contact> results = phoneBook.search(query);
+        List<AbstractContact> results = phoneBook.search(query);
 
         // Display results
         if (results.isEmpty()) {
@@ -183,7 +183,7 @@ public class Main {
                 try {
                     int index = Integer.parseInt(action) - 1;  // Convert to 0-based index
                     if (index >= 0 && index < results.size()) {
-                        Contact contact = results.get(index);
+                        AbstractContact contact = results.get(index);
                         contact.display();
 
                         // Allow edit or delete after displaying a contact

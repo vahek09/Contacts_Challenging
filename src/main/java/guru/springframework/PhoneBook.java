@@ -6,16 +6,16 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class PhoneBook implements Serializable {
-    private List<Contact> contacts = new ArrayList<>();
+    private List<AbstractContact> contacts = new ArrayList<>();
 
-    public void addContact(Contact contact) {
+    public void addContact(AbstractContact contact) {
         contacts.add(contact);
     }
 
-    public List<Contact> search(String query) {
-        List<Contact> results = new ArrayList<>();
+    public List<AbstractContact> search(String query) {
+        List<AbstractContact> results = new ArrayList<>();
         Pattern pattern = Pattern.compile(query, Pattern.CASE_INSENSITIVE);
-        for (Contact contact : contacts) {
+        for (AbstractContact contact : contacts) {
             if (pattern.matcher(contact.getAllFieldsForSearch()).find()) {
                 results.add(contact);
             }
@@ -29,7 +29,7 @@ public class PhoneBook implements Serializable {
         }
     }
 
-    public Contact getContact(int index) {
+    public AbstractContact getContact(int index) {
         if (index >= 0 && index < contacts.size()) {
             return contacts.get(index); // Return the contact at the specified index
         }
@@ -40,7 +40,7 @@ public class PhoneBook implements Serializable {
         return contacts.size();
     }
 
-    public void removeContact(Contact contact) {
+    public void removeContact(AbstractContact contact) {
         contacts.remove(contact);
     }
 

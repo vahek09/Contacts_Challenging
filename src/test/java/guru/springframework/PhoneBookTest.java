@@ -121,9 +121,9 @@ class PhoneBookTest {
         phoneBook.addContact(person);
 
         // when
-        Contact validContact = phoneBook.getContact(0);
-        Contact negativeIndexContact = phoneBook.getContact(-1);
-        Contact outOfBoundsContact = phoneBook.getContact(10);
+        AbstractContact validContact = phoneBook.getContact(0);
+        AbstractContact negativeIndexContact = phoneBook.getContact(-1);
+        AbstractContact outOfBoundsContact = phoneBook.getContact(10);
 
         // then
         assertNotNull(validContact);
